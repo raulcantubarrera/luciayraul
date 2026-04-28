@@ -272,6 +272,12 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 26px;
+      grid-auto-rows: 1fr;
+    }
+
+    .details-grid > div{
+      display: grid;
+      grid-template-rows: 1fr auto;
     }
 
     .card{
@@ -279,6 +285,8 @@
       border: 1px solid var(--line);
       border-radius: 24px;
       padding: 34px 28px;
+      background-position: center;
+      background-size: cover;
     }
 
     .card p + p{
@@ -311,6 +319,17 @@
       font-size: 13px;
       letter-spacing: .14em;
       text-transform: uppercase;
+    }
+
+    .details-grid .card h3, 
+    .details-grid .card .eyebrow, 
+    .details-grid .card p {
+        background-color: rgba(255, 255, 255, .5);
+        border-radius: 5px;
+        padding-left: 10px;
+        padding-right: 10px;
+        color: #000000;
+        width: fit-content;
     }
 
     .gallery-grid{
@@ -351,6 +370,79 @@
       color: var(--muted);
     }
 
+    .regalo-phrase{
+      font-style: italic;
+      max-width: 600px;
+      margin: 0 auto 40px;
+      color: var(--muted);
+      line-height: 1.8;
+    }
+
+    .regalo-cards{
+      display: inline-flex;
+      flex-direction: column;
+      gap: 18px;
+    }
+
+    .regalo-card{
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 20px;
+      padding: 24px 28px;
+      display: flex;
+      align-items: center;
+      gap: 22px;
+    }
+
+    .regalo-icon{
+      width: 52px;
+      height: 52px;
+      min-width: 52px;
+      background: rgba(181,139,99,.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .regalo-icon svg{
+      width: 24px;
+      height: 24px;
+      stroke: var(--accent);
+      fill: none;
+      stroke-width: 1.5;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .regalo-info {
+        text-align: center;
+        width: 100%;
+    }
+
+    .regalo-info h3{
+      font-size: 22px;
+      margin-bottom: 4px;
+    }
+
+    .regalo-info p{
+      font-size: 14px;
+      margin-bottom: 2px;
+    }
+
+    .clabe-number{
+      display: inline-block;
+      margin-top: 6px;
+      padding: 6px 14px;
+      background: rgba(181,139,99,.08);
+      border-radius: 10px;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 18px;
+      font-weight: 600;
+      letter-spacing: .1em;
+      color: var(--text);
+    }
+
     @media (max-width: 920px){
       .hero{
         grid-template-columns: 1fr;
@@ -370,6 +462,7 @@
       .countdown-wrap{
         grid-template-columns: repeat(2, 1fr);
       }
+
     }
 
     @media (max-width: 640px){
@@ -408,6 +501,7 @@
         <a href="#nosotros">Nosotros</a>
         <a href="#informacion">Información</a>
         <a href="#galeria">Galería</a>
+        <a href="#regalo">Regalo</a>
         <a href="#rsvp">RSVP</a>
       </nav>
     </div>
@@ -435,10 +529,15 @@
         <div class="count-item"><strong>--</strong><span>Min</span></div>
         <div class="count-item"><strong>--</strong><span>Seg</span></div>
       </div>
+
+      <div style="margin-top:34px;max-width:520px;">
+        <iframe data-testid="embed-iframe" style="border-radius:12px" src="https://open.spotify.com/embed/track/5ZIAGLaxIMK8FnNdtZQpkw?utm_source=generator&theme=0" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+      </div>
     </div>
 
     <div class="hero-media">
-      <img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=80" alt="Foto de pareja de ejemplo">
+      <img src="./media/fotos/2.jpg" alt="Foto de L&R">
+      <!--<img src="https://images.unsplash.com/photo-1520854221256-17451cc331bf?auto=format&fit=crop&w=1400&q=80" alt="Foto de pareja de ejemplo">-->
     </div>
   </section>
 
@@ -456,7 +555,7 @@
 
       <div class="story-grid">
         <div class="story-photo">
-          <img src="https://images.unsplash.com/photo-1516589178581-6cd7833ae3b2?auto=format&fit=crop&w=1200&q=80" alt="Foto romántica de ejemplo">
+          <img src="./media/fotos/1.jpg" alt="Foto romántica de ejemplo">
         </div>
         <div class="story-text">
           <div class="eyebrow">Save the date</div>
@@ -480,19 +579,29 @@
       </div>
 
       <div class="details-grid">
-        <article class="card">
-          <div class="eyebrow">Ceremonia</div>
-          <h3>Parroquia de San Jeronimo De Monterrey</h3>
-          <p>Monterrey, Nuevo León</p>
-          <p class="muted">5:00 PM</p>
-        </article>
+        <div>
+          <article class="card" style="background-image: url(./media/fotos/iglesia.png);">
+            <div class="eyebrow">Ceremonia</div>
+            <h3>Parroquia de San Jeronimo De Monterrey</h3>
+            <p>Monterrey, Nuevo León</p>
+            <p class="muted">5:00 PM</p>
+          </article>
+          <div style="text-align:center;margin-top:14px;">
+            <a class="btn secondary" href="https://maps.app.goo.gl/qFseYu2FLvq51Fcg6" target="_blank"><svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-right:6px;" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Navegar</a>
+          </div>
+        </div>
 
-        <article class="card">
-          <div class="eyebrow">Recepción</div>
-          <h3>Hacienda Verona</h3>
-          <p>Barrio Antigüo</p>
-          <p class="muted">7:00 PM</p>
-        </article>
+        <div>
+          <article class="card" style="background-image: url(./media/fotos/salon.png);">
+            <div class="eyebrow">Recepción</div>
+            <h3>Hacienda Verona</h3>
+            <p>Barrio Antigüo</p>
+            <p class="muted">7:00 PM</p>
+          </article>
+          <div style="text-align:center;margin-top:14px;">
+            <a class="btn secondary" href="https://maps.app.goo.gl/2MaRhk5WS7cq62hq5" target="_blank"><svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-right:6px;" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Navegar</a>
+          </div>
+        </div>
       </div>
 
       <div class="schedule">
@@ -524,20 +633,60 @@
     <div class="container">
       <div class="centered">
         <div class="eyebrow">Galería</div>
-        <h2>Algunos momentos de ejemplo</h2>
-        <p>Estas fotos son temporales para maquetar el diseño. Después las cambiamos por las suyas.</p>
+        <!--<h2>Algunos momentos de ejemplo</h2>
+        <p>Estas fotos son temporales para maquetar el diseño. Después las cambiamos por las suyas.</p>-->
       </div>
 
       <div class="gallery-grid">
         <div class="photo">
-          <img src="https://images.unsplash.com/photo-1519741497674-611481863552?auto=format&fit=crop&w=1200&q=80" alt="Foto de ejemplo 1">
+          <img src="./media/fotos/3.jpg" alt="Foto de ejemplo 1">
         </div>
         <div class="photo">
-          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?auto=format&fit=crop&w=1200&q=80" alt="Foto de ejemplo 2">
+          <img src="./media/fotos/4.jpg" alt="Foto de ejemplo 2">
         </div>
         <div class="photo">
-          <img src="https://images.unsplash.com/photo-1511285560929-80b456fea0bc?auto=format&fit=crop&w=1200&q=80" alt="Foto de ejemplo 3">
+          <img src="./media/fotos/5.jpg" alt="Foto de ejemplo 3">
         </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="regalo">
+    <div class="container">
+      <div class="centered">
+        <div class="eyebrow">Regalo</div>
+        <h2>Mesa de regalos</h2>
+        <p class="regalo-phrase">
+          Creemos que los mejores regalos no se guardan... se viven y se convierten en recuerdos para toda la vida.<br><br>
+          Por eso, si deseas obsequiarnos algo, tu regalo formará parte de las experiencias que harán única nuestra luna de miel.
+        </p>
+      </div>
+
+      <div style="display:flex;justify-content:center;">
+      <div class="regalo-cards">
+        <article class="regalo-card">
+          <div class="regalo-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div class="regalo-info">
+            <h3>Sobre</h3>
+            <p>El día de la boda</p>
+          </div>
+        </article>
+
+        <article class="regalo-card">
+          <div class="regalo-icon">
+            <svg viewBox="0 0 24 24"><rect x="1" y="3" width="22" height="18" rx="2" ry="2"/><line x1="1" y1="9" x2="23" y2="9"/><line x1="1" y1="15" x2="23" y2="15"/></svg>
+          </div>
+          <div class="regalo-info">
+            <h3>Transferencia</h3>
+            <p><strong>Raúl Cantú Barrera</strong></p>
+            <p>Banco Santander</p>
+            <p class="muted">CLABE Interbancaria</p>
+            <div class="clabe-number">0145 8056 6060 4959 51</div>
+          </div>
+        </article>
+      </div>
       </div>
     </div>
   </section>
@@ -550,15 +699,16 @@
       </div>
 
       <div class="rsvp-box">
+        <p style="font-family:'Cormorant Garamond',serif;font-size:clamp(22px,4vw,32px);line-height:1.3;margin-bottom:12px;" id="rsvp-greeting"></p>
         <p>
           Por favor confirma antes del <strong>10 de Agosto 2026</strong>.
         </p>
-        <p class="rsvp-note">
-          Aquí después podemos conectar un formulario real, WhatsApp o Google Forms.
-        </p>
 
         <div class="hero-actions" style="justify-content:center; margin-top:26px;">
-          <a class="btn primary" href="#">Confirmar asistencia</a>
+          <a class="btn primary" href="#" id="btn-rsvp">
+            <svg style="width:18px;height:18px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-right:8px;" viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            <span id="rsvp-count"></span> — Confirmar asistencia
+          </a>
         </div>
       </div>
     </div>
@@ -604,6 +754,27 @@
 
     updateCountdown();
     setInterval(updateCountdown, 1000);
+
+    const params = new URLSearchParams(window.location.search);
+    const nombre = params.get("nombre");
+    const invitados = parseInt(params.get("invitados")) || 0;
+    const greeting = document.getElementById("rsvp-greeting");
+    const btnRsvp = document.getElementById("btn-rsvp");
+    const rsvpCount = document.getElementById("rsvp-count");
+
+    if (nombre) {
+      greeting.textContent = "Hola, " + nombre;
+      rsvpCount.textContent = invitados;
+      const persona = invitados === 1 ? "persona" : "personas";
+      const mensaje = encodeURIComponent("Hola, soy " + nombre + ", y quiero confirmar mi asistencia para " + invitados + " " + persona + ".");
+      btnRsvp.href = "https://wa.me/528132819334?text=" + mensaje;
+      btnRsvp.target = "_blank";
+    } else {
+      greeting.textContent = "Solicita a los novios el link de tu invitación personal";
+      rsvpCount.textContent = "0";
+      btnRsvp.style.pointerEvents = "none";
+      btnRsvp.style.opacity = "0.4";
+    }
   </script>
 </body>
 </html>
