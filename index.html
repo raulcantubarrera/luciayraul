@@ -300,14 +300,20 @@
       border: 1px solid var(--line);
       border-radius: 24px;
       overflow: hidden;
-      background: var(--paper);
     }
 
     .schedule-row{
       display: grid;
-      grid-template-columns: 140px 1fr;
-      padding: 18px 22px;
+      grid-template-columns: 52px 130px 1fr;
+      align-items: center;
+      gap: 14px;
+      padding: 16px 22px;
       border-top: 1px solid var(--line);
+    }
+
+    .schedule-icon{
+      max-width: 52px;
+      max-height: 52px;
     }
 
     .schedule-row:first-child{
@@ -443,6 +449,160 @@
       color: var(--text);
     }
 
+    .dresscode-icon{
+      display: block;
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 36px;
+      opacity: .75;
+    }
+
+    .dresscode-card{
+      margin: 0 auto;
+      max-width: 540px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 24px;
+      padding: 40px 36px;
+      text-align: center;
+    }
+
+    .dresscode-card .label{
+      font-size: 11px;
+      letter-spacing: .22em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    .dresscode-card .value{
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(26px, 4vw, 38px);
+      font-weight: 500;
+      line-height: 1.1;
+      margin-bottom: 24px;
+    }
+
+    .dresscode-avoid{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding-top: 22px;
+      border-top: 1px solid var(--line);
+    }
+
+    .dresscode-avoid-swatches{
+      display: flex;
+      gap: 6px;
+    }
+
+    .swatch{
+      width: 22px;
+      height: 22px;
+      border-radius: 50%;
+      border: 1px solid rgba(0,0,0,.08);
+      flex-shrink: 0;
+    }
+
+    .dresscode-avoid p{
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .lightbox{
+      position: fixed;
+      inset: 0;
+      z-index: 200;
+      background: rgba(0,0,0,.93);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+
+    .lightbox.open{
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .lb-img-wrap{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: min(90vw, 1200px);
+      max-height: 86vh;
+    }
+
+    .lb-img-wrap img{
+      width: auto !important;
+      height: auto !important;
+      max-width: min(90vw, 1200px);
+      max-height: 86vh;
+      object-fit: contain !important;
+      border-radius: 10px;
+      display: block;
+    }
+
+    .lb-close{
+      position: absolute;
+      top: 18px;
+      right: 22px;
+      background: rgba(255,255,255,.12);
+      border: none;
+      color: #fff;
+      font-size: 22px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+      line-height: 1;
+    }
+
+    .lb-close:hover{ background: rgba(255,255,255,.22); }
+
+    .lb-arrow{
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(255,255,255,.1);
+      border: none;
+      color: #fff;
+      font-size: 36px;
+      width: 54px;
+      height: 54px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+      user-select: none;
+      line-height: 1;
+    }
+
+    .lb-arrow:hover{ background: rgba(255,255,255,.2); }
+    .lb-prev{ left: 18px; }
+    .lb-next{ right: 18px; }
+
+    .lb-counter{
+      position: absolute;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      color: rgba(255,255,255,.5);
+      font-size: 12px;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
     @media (max-width: 920px){
       .hero{
         grid-template-columns: 1fr;
@@ -485,8 +645,24 @@
       }
 
       .schedule-row{
-        grid-template-columns: 1fr;
-        gap: 6px;
+        grid-template-columns: 44px 1fr;
+        gap: 10px;
+      }
+
+      .schedule-time{
+        grid-column: 2;
+      }
+
+      .schedule-row > div:last-child{
+        grid-column: 2;
+      }
+
+      .schedule-icon{
+        width: 44px;
+        height: 44px;
+        grid-row: 1 / 3;
+        grid-column: 1;
+        align-self: center;
       }
     }
   </style>
@@ -502,6 +678,7 @@
         <a href="#informacion">Información</a>
         <a href="#galeria">Galería</a>
         <a href="#regalo">Regalo</a>
+        <a href="#dresscode">Dress Code</a>
         <a href="#rsvp">RSVP</a>
       </nav>
     </div>
@@ -575,7 +752,7 @@
     <div class="container">
       <div class="centered">
         <div class="eyebrow">Información</div>
-        <h2>Detalles del evento</h2>
+        <h2>Itinerario</h2>
       </div>
 
       <div class="details-grid">
@@ -596,7 +773,7 @@
             <div class="eyebrow">Recepción</div>
             <h3>Hacienda Verona</h3>
             <p>Barrio Antigüo</p>
-            <p class="muted">7:00 PM</p>
+            <p class="muted">7:30 PM</p>
           </article>
           <div style="text-align:center;margin-top:14px;">
             <a class="btn secondary" href="https://maps.app.goo.gl/2MaRhk5WS7cq62hq5" target="_blank"><svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-right:6px;" viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>Navegar</a>
@@ -606,23 +783,23 @@
 
       <div class="schedule">
         <div class="schedule-row">
+          <img class="schedule-icon" src="./media/fotos/couple-1.png" alt="">
           <div class="schedule-time">5:00 PM</div>
-          <div>Ceremonia</div>
+          <div>Ceremonia Católica</div>
         </div>
-        <div class="schedule-row">
-          <div class="schedule-time">6:00 PM</div>
-          <div>Traslado y bienvenida</div>
-        </div>
-        <div class="schedule-row">
+        <div class="schedule-row" id="row-civil" style="display:none;">
+          <img class="schedule-icon" src="./media/fotos/couple-2.png" alt="">
           <div class="schedule-time">7:00 PM</div>
+          <div>Ceremonia Civil</div>
+        </div>
+        <div class="schedule-row">
+          <img class="schedule-icon" src="./media/fotos/couple-4.png" alt="">
+          <div class="schedule-time">7:30 PM</div>
           <div>Recepción</div>
         </div>
         <div class="schedule-row">
-          <div class="schedule-time">9:00 PM</div>
-          <div>Cena</div>
-        </div>
-        <div class="schedule-row">
-          <div class="schedule-time">10:30 PM</div>
+          <img class="schedule-icon" src="./media/fotos/couple-3.png" alt="">
+          <div class="schedule-time">8:00 PM</div>
           <div>Fiesta</div>
         </div>
       </div>
@@ -648,8 +825,25 @@
           <img src="./media/fotos/5.jpg" alt="Foto de ejemplo 3">
         </div>
       </div>
+
+      <div style="text-align:center;margin-top:36px;">
+        <button class="btn secondary" onclick="openLightbox(0)">
+          <svg style="width:16px;height:16px;fill:none;stroke:currentColor;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;margin-right:8px;" viewBox="0 0 24 24"><rect x="3" y="3" width="18" height="18" rx="2"/><circle cx="8.5" cy="8.5" r="1.5"/><polyline points="21 15 16 10 5 21"/></svg>
+          Galería Completa
+        </button>
+      </div>
     </div>
   </section>
+
+  <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Galería de fotos">
+    <button class="lb-close" onclick="closeLightbox()" aria-label="Cerrar">&#x2715;</button>
+    <button class="lb-arrow lb-prev" onclick="lbPrev()" aria-label="Anterior">&#8249;</button>
+    <div class="lb-img-wrap">
+      <img id="lb-img" src="" alt="">
+    </div>
+    <button class="lb-arrow lb-next" onclick="lbNext()" aria-label="Siguiente">&#8250;</button>
+    <div class="lb-counter"><span id="lb-cur">1</span> / <span id="lb-tot">57</span></div>
+  </div>
 
   <section class="section" id="regalo">
     <div class="container">
@@ -687,6 +881,31 @@
           </div>
         </article>
       </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id="dresscode">
+    <div class="container">
+      <div class="centered">
+        <div class="eyebrow">Vestimenta</div>
+        <h2>Dress Code</h2>
+      </div>
+
+      <img class="dresscode-icon" src="./media/fotos/dresscode.svg" alt="Dress code">
+
+      <div class="dresscode-card">
+        <p class="label">Código de vestimenta</p>
+        <p class="value">Formal</p>
+
+        <div class="dresscode-avoid">
+          <div class="dresscode-avoid-swatches">
+            <div class="swatch" style="background:#f5f5f0;" title="Colores claros"></div>
+            <div class="swatch" style="background:#e8ede8;" title="Colores claros"></div>
+            <div class="swatch" style="background:#b2c9a0;" title="Verde claro"></div>
+          </div>
+          <p>Favor de evitar colores claros y verde claro</p>
+        </div>
       </div>
     </div>
   </section>
@@ -756,6 +975,11 @@
     setInterval(updateCountdown, 1000);
 
     const params = new URLSearchParams(window.location.search);
+
+    if (params.get("civil") === "si") {
+      document.getElementById("row-civil").style.display = "";
+    }
+
     const nombre = params.get("nombre");
     const invitados = parseInt(params.get("invitados")) || 0;
     const greeting = document.getElementById("rsvp-greeting");
@@ -775,6 +999,59 @@
       btnRsvp.style.pointerEvents = "none";
       btnRsvp.style.opacity = "0.4";
     }
+    const galleryPhotos = [
+      '1-L&R-2.JPG','2-L&R.JPG','3-L&R-3.JPG','4-L&R-5.JPG','5-L&R-6.JPG',
+      '6-L&R-7.JPG','7-L&R-8.JPG','8-L&R-9.JPG','9-L&R-10.JPG','10-L&R-11.JPG',
+      '11-L&R-12.JPG','12-L&R-13.JPG','13-L&R-15.JPG','14-L&R-14.JPG','15-L&R-16.JPG',
+      '16-L&R-17.JPG','17-L&R-18.JPG','18-L&R-19.JPG','19-L&R-20.JPG','20-L&R-21.JPG',
+      '21-L&R-22.JPG','22-L&R-23.JPG','23-L&R-24.JPG','24-L&R-25.JPG','25-L&R-27.JPG',
+      '26-L&R-26.JPG','27-L&R-28.JPG','28-L&R-29.JPG','29-L&R-31.JPG','30-L&R-30.JPG',
+      '31-L&R-32.JPG','32-L&R-33.JPG','33-L&R-34.JPG','34-L&R-36.JPG','35-L&R-35.JPG',
+      '36-L&R-37.JPG','37-L&R-38.JPG','38-L&R-40.JPG','39-L&R-39.JPG','40-L&R-42.JPG',
+      '41-L&R-41.JPG','42-L&R-43.JPG','43-L&R-44.JPG','44-L&R-46.JPG','45-L&R-45.JPG',
+      '46-L&R-47.JPG','47-L&R-49.JPG','48-L&R-48.JPG','49-L&R-50.JPG','50-L&R-52.JPG',
+      '51-L&R-51.JPG','52-L&R-53.JPG','53-L&R-55.JPG','54-L&R-54.JPG','55-L&R-56.JPG',
+      '56-L&R-57.JPG','57-L&R-4.JPG'
+    ].map(f => './media/fotos/galeria/' + f);
+
+    let lbIndex = 0;
+    const lb = document.getElementById('lightbox');
+    const lbImg = document.getElementById('lb-img');
+    const lbCur = document.getElementById('lb-cur');
+    const lbTot = document.getElementById('lb-tot');
+    lbTot.textContent = galleryPhotos.length;
+
+    function openLightbox(i) {
+      lbIndex = ((i % galleryPhotos.length) + galleryPhotos.length) % galleryPhotos.length;
+      lbImg.src = galleryPhotos[lbIndex];
+      lbCur.textContent = lbIndex + 1;
+      lb.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeLightbox() {
+      lb.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function lbNext() { openLightbox(lbIndex + 1); }
+    function lbPrev() { openLightbox(lbIndex - 1); }
+
+    lb.addEventListener('click', e => { if (e.target === lb) closeLightbox(); });
+
+    document.addEventListener('keydown', e => {
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'ArrowRight') lbNext();
+      else if (e.key === 'ArrowLeft') lbPrev();
+      else if (e.key === 'Escape') closeLightbox();
+    });
+
+    let touchStartX = 0;
+    lb.addEventListener('touchstart', e => { touchStartX = e.touches[0].clientX; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      const dx = e.changedTouches[0].clientX - touchStartX;
+      if (Math.abs(dx) > 50) dx < 0 ? lbNext() : lbPrev();
+    });
   </script>
 </body>
 </html>
