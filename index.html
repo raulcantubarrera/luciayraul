@@ -866,7 +866,7 @@
           <div class="schedule-time">5:00 PM</div>
           <div>Ceremonia Católica</div>
         </div>
-        <div class="schedule-row" id="row-civil" style="display:none;">
+        <div class="schedule-row">
           <img class="schedule-icon" src="./media/fotos/couple-2.png" alt="">
           <div class="schedule-time">7:00 PM</div>
           <div>Ceremonia Civil</div>
@@ -1065,10 +1065,6 @@
     setInterval(updateCountdown, 1000);
 
     const params = new URLSearchParams(window.location.search);
-
-    if (params.get("civil") === "si") {
-      document.getElementById("row-civil").style.display = "";
-    }
 
     const nombre = params.get("nombre");
     const invitados = parseInt(params.get("invitados")) || 0;
