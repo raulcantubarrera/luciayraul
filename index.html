@@ -400,16 +400,17 @@
       display: inline-flex;
       flex-direction: column;
       gap: 18px;
+      width: 100%;
     }
 
     .regalo-card{
       background: var(--paper);
-      border: 1px solid var(--line);
       border-radius: 20px;
       padding: 24px 28px;
       display: flex;
+      flex-direction: column;
       align-items: center;
-      gap: 22px;
+      gap: 16px;
     }
 
     .regalo-icon{
@@ -521,6 +522,72 @@
       font-size: 13px;
       color: var(--muted);
     }
+
+    .regalo-modal{
+      position: fixed;
+      inset: 0;
+      z-index: 150;
+      background: rgba(45,42,38,.55);
+      backdrop-filter: blur(8px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity .25s ease;
+    }
+
+    .regalo-modal.open{
+      opacity: 1;
+      pointer-events: all;
+    }
+
+    .regalo-modal-inner{
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      padding: 48px 36px 40px;
+      max-width: 540px;
+      width: 100%;
+      position: relative;
+      max-height: 90vh;
+      overflow-y: auto;
+    }
+
+    .regalo-modal-inner h3{
+      font-size: clamp(26px, 4vw, 36px);
+      text-align: center;
+      margin-bottom: 6px;
+    }
+
+    .regalo-modal-subtitle{
+      text-align: center;
+      color: var(--muted);
+      font-size: 13px;
+      letter-spacing: .1em;
+      margin-bottom: 32px;
+    }
+
+    .regalo-modal-close{
+      position: absolute;
+      top: 16px;
+      right: 18px;
+      background: rgba(0,0,0,.06);
+      border: none;
+      color: var(--text);
+      font-size: 18px;
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s;
+    }
+
+    .regalo-modal-close:hover{ background: rgba(0,0,0,.11); }
 
     .lightbox{
       position: fixed;
@@ -868,7 +935,19 @@
         </p>
       </div>
 
-      <div style="display:flex;justify-content:center;">
+      <div style="text-align:center;margin-top:10px;">
+        <button class="btn primary" onclick="openRegaloModal()">
+          Ver opciones
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <div id="regalo-modal" class="regalo-modal" role="dialog" aria-modal="true">
+    <div class="regalo-modal-inner">
+      <button class="regalo-modal-close" onclick="closeRegaloModal()" aria-label="Cerrar">&#x2715;</button>
+      <h3>Mesa de regalos</h3>
+      <p class="regalo-modal-subtitle">Elige la opción que prefieras</p>
       <div class="regalo-cards">
         <article class="regalo-card">
           <div class="regalo-icon">
@@ -893,9 +972,8 @@
           </div>
         </article>
       </div>
-      </div>
     </div>
-  </section>
+  </div>
 
   <section class="section" id="dresscode">
     <div class="container">
@@ -1011,6 +1089,23 @@
       btnRsvp.style.pointerEvents = "none";
       btnRsvp.style.opacity = "0.4";
     }
+    const regaloModal = document.getElementById('regalo-modal');
+
+    function openRegaloModal() {
+      regaloModal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function closeRegaloModal() {
+      regaloModal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    regaloModal.addEventListener('click', e => { if (e.target === regaloModal) closeRegaloModal(); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && regaloModal.classList.contains('open')) closeRegaloModal();
+    });
+
     const galleryPhotos = [
       '1-L&R-2.JPG','2-L&R.JPG','3-L&R-3.JPG','4-L&R-5.JPG','5-L&R-6.JPG',
       '6-L&R-7.JPG','7-L&R-8.JPG','8-L&R-9.JPG','9-L&R-10.JPG','10-L&R-11.JPG',
